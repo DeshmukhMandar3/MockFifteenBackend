@@ -18,10 +18,19 @@ boardRouter.post("/add", async (req, res, next) => {
   }
 });
 
-boardRouter.get("/get/:id", async (req, res, next) => {
+boardRouter.get("/getone/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     let data = await boardModel.findById(id);
+    res.send(data);
+  } catch (err) {
+    next(err);
+  }
+});
+
+boardRouter.get("/get", async (req, res, next) => {
+  try {
+    let data = await boardModel.find();
     res.send(data);
   } catch (err) {
     next(err);
